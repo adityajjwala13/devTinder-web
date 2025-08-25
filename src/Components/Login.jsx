@@ -7,6 +7,7 @@ import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
   const [emailID, setEmailID] = useState("ravi@gmail.com");
+  const [error, setError] = useState("");
   const [password, setPassword] = useState("Ravi@4888");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ const Login = () => {
       dispatch(addUser(response.data));
       navigate("/");
     } catch (error) {
+      setError(error?.response.data || "Something went wrong");
       console.error(error);
     }
   };
@@ -38,7 +40,10 @@ const Login = () => {
                 type="text"
                 className="grow"
                 value={emailID}
-                onChange={(e) => setEmailID(e.target.value)}
+                onChange={(e) => {
+                  setEmailID(e.target.value);
+                  setError("");
+                }}
               />
             </label>
           </div>
@@ -49,11 +54,15 @@ const Login = () => {
                 type="password"
                 className="grow"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setError("");
+                }}
               />
             </label>
           </div>
-          <div className="card-actions justify-center mt-6">
+          <p className="text-red-500">{error}</p>
+          <div className="card-actions justify-center">
             <button
               className="btn btn-primary w-full py-2 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
               onClick={handleLogin}
