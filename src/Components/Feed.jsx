@@ -14,7 +14,7 @@ const Feed = () => {
       const res = await axios.get(BASE_URL + "/feed", {
         withCredentials: true,
       });
-      console.log(res);
+      // console.log(res);
       dispatch(addFeed(res?.data?.data));
     } catch (error) {
       console.log(error.message);
@@ -23,8 +23,9 @@ const Feed = () => {
   useEffect(() => {
     getFeed();
   }, []);
+  console.log(feed);
   return (
-    <div className="flex justify-center my-10 ">
+    <div className="flex justify-center my-13 ">
       {/* {feed &&
         feed.map((user) => {
           return <UserCard key={user._id} user={user} />;

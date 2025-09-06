@@ -4,6 +4,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import axios from "axios";
 import { removeUser } from "../utils/userSlice";
+import { removeFeed } from "../utils/feedSlice";
 
 const Navbar = () => {
   const user = useSelector((store) => store.user);
@@ -13,6 +14,7 @@ const Navbar = () => {
     try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
       dispatch(removeUser());
+      dispatch(removeFeed());
       navigate("/login");
     } catch (error) {
       alert(error.message);
@@ -20,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-300 shadow-sm">
+    <div className="navbar bg-base-300 shadow-sm sticky top-0 z-100">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl">
           🧑🏻‍💻DevTinder
@@ -39,7 +41,7 @@ const Navbar = () => {
                 <div className="w-10 rounded-full">
                   <img
                     alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    src={user.photoURL}
                   />
                 </div>
               </div>
@@ -56,7 +58,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link to="/">Settings</Link>
+              <Link to="/connections">Connections</Link>
             </li>
             <li>
               <Link onClick={handleLogout}>Logout</Link>
