@@ -4,7 +4,13 @@ const UserCard = ({ user }) => {
   return (
     <div className="card bg-base-300 w-80 shadow-sm min-h-[500px]">
       <figure>
-        <img src={photoURL} alt="..." className="h-90 w-80" />
+        <img
+          src={
+            photoURL || "https://api.dicebear.com/7.x/miniavs/svg?seed=NoImg"
+          }
+          alt="No image.Please add one!!"
+          className="h-90 w-80"
+        />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{firstName + " " + lastName}</h2>
