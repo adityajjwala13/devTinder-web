@@ -25,7 +25,7 @@ const Feed = () => {
   }, []);
   console.log(feed);
   return (
-    <div className="flex justify-center my-13 ">
+    <div className="flex justify-center my-15 ">
       {/* {feed &&
         feed.map((user) => {
           return <UserCard key={user._id} user={user} />;

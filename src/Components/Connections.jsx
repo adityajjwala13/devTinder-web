@@ -8,6 +8,7 @@ const Connections = () => {
   const dispatch = useDispatch();
   const connections = useSelector((store) => store.connections);
   const fetchConnections = async () => {
+    if (connections) return;
     try {
       const connections = await axios.get(BASE_URL + "/user/connections", {
         withCredentials: true,
@@ -19,9 +20,9 @@ const Connections = () => {
   };
   useEffect(() => {
     fetchConnections();
+    // eslint-disable-next-line
   }, []);
-  if (!connections) return;
-  if (connections.length === 0)
+  if (!connections || !connections.length)
     return (
       <div className="flex justify-center my-10">No Connections Found</div>
     );
