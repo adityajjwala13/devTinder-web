@@ -1,5 +1,4 @@
 import axios from "axios";
-import React from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequests, removeRequest } from "../utils/requestSlice";
@@ -9,10 +8,12 @@ import { removeConnections } from "../utils/connectionSlice";
 const Requests = () => {
   const requests = useSelector((store) => store.requests);
   const dispatch = useDispatch();
+
   useEffect(() => {
     fetchRequests();
     // eslint-disable-next-line
   }, []);
+
   const reviewRequest = async (status, _id) => {
     try {
       await axios.post(
@@ -29,6 +30,7 @@ const Requests = () => {
       console.error(error.message);
     }
   };
+
   const fetchRequests = async () => {
     try {
       if (requests) return;

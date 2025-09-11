@@ -22,15 +22,19 @@ const Feed = () => {
   };
   useEffect(() => {
     getFeed();
+    //eslint-disable-next-line
   }, []);
-  console.log(feed);
+  if (!feed || feed.length <= 0)
+    return (
+      <div className="flex justify-center my-10">No new users found!!</div>
+    );
   return (
-    <div className="flex justify-center my-15 ">
+    <div className="flex justify-center my-10 ">
       {/* {feed &&
         feed.map((user) => {
           return <UserCard key={user._id} user={user} />;
         })} */}
-      {feed && <UserCard user={feed[0]} />}
+      <UserCard user={feed[0]} />
     </div>
   );
 };
