@@ -42,12 +42,22 @@ const Navbar = () => {
                 role="button"
                 className="btn btn-ghost btn-circle avatar mr-5"
               >
-                <div className="w-10 rounded-full">
-                  <img
-                    alt="Please add img to your profile"
-                    src={user.photoURL}
-                  />
-                </div>
+                {user.photoURL ? (
+                  <div className="w-10 h-10 rounded-full overflow-hidden">
+                    <img
+                      alt="Profile"
+                      src={user.photoURL}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-9 h-9 rounded-full bg-indigo-500 flex items-center justify-center">
+                    <span className="text-white font-semibold text-lg leading-none flex items-center justify-center h-full">
+                      {(user.firstName?.[0] ?? "").toUpperCase()}
+                      {(user.lastName?.[0] ?? "").toUpperCase()}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           )}

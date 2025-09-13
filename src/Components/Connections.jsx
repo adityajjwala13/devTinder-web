@@ -38,7 +38,10 @@ const Connections = () => {
           >
             <div>
               <img
-                src={photoURL}
+                src={
+                  photoURL ||
+                  "https://api.dicebear.com/7.x/miniavs/svg?seed=NoImg"
+                }
                 alt="noPhoto"
                 className="h-20 w-20 rounded-full"
               />
@@ -47,7 +50,7 @@ const Connections = () => {
               <h2 className="font-bold text-xl">
                 {firstName + " " + lastName}
               </h2>
-              <p>{age + ", " + gender}</p>
+              {age && gender && <p>{age + ", " + gender}</p>}
             </div>
           </div>
         );
