@@ -24,16 +24,18 @@ const Connections = () => {
   }, []);
   if (!connections || !connections.length)
     return (
-      <div className="flex justify-center my-10">No Connections Found</div>
+      <div className="flex justify-center my-10 text-slate-300">
+        No Connections Found
+      </div>
     );
   return (
     <div className="text-center my-10">
-      <h1 className="text-2xl text-red-200">Connections</h1>
+      <h1 className="text-2xl text-cyan-300">Connections</h1>
       {connections.map((connection) => {
         const { _id, firstName, lastName, photoURL, gender, age } = connection;
         return (
           <div
-            className="flex items-center p-4 rounded-lg bg-base-300 w-90 mx-auto m-4"
+            className="flex items-center p-4 rounded-2xl bg-white/6 backdrop-blur-md border border-white/10 text-slate-200 w-100 max-w-3xl mx-auto my-4 shadow-2xl ring-1 ring-white/6"
             key={_id}
           >
             <div>
@@ -47,10 +49,12 @@ const Connections = () => {
               />
             </div>
             <div className="text-left mx-4">
-              <h2 className="font-bold text-xl">
+              <h2 className="font-bold text-xl text-cyan-200">
                 {firstName + " " + lastName}
               </h2>
-              {age && gender && <p>{age + ", " + gender}</p>}
+              {age && gender && (
+                <p className="text-slate-300">{age + ", " + gender}</p>
+              )}
             </div>
           </div>
         );

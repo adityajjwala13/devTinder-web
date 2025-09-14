@@ -20,29 +20,33 @@ const UserCard = ({ user }) => {
   };
 
   return (
-    <div className="card bg-base-300 w-80 shadow-sm min-h-[500px]">
+    <div className="card w-80 min-h-[500px] ring-1 ring-white/6 rounded-2xl overflow-hidden bg-white/6 backdrop-blur-md border border-white/10 shadow-2xl text-slate-200">
       <figure>
         <img
           src={
             photoURL || "https://api.dicebear.com/7.x/miniavs/svg?seed=NoImg"
           }
-          alt="No image.Please add one!!"
+          alt="No image.Please add one!"
           className="h-90 w-80"
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{firstName + " " + lastName}</h2>
-        {age && gender && <p>{age + "," + " " + gender}</p>}
-        <p>{about}</p>
-        <div className="card-actions justify-center my-2">
+        <h2 className="card-title text-cyan-300">
+          {firstName + " " + lastName}
+        </h2>
+        {age && gender && (
+          <p className="text-slate-300">{age + ", " + gender}</p>
+        )}
+        <p className="text-slate-300">{about}</p>
+        <div className="card-actions justify-center my-2 gap-3">
           <button
-            className="btn btn-primary text-black"
+            className="btn bg-cyan-400 text-slate-900 border-0 hover:bg-cyan-300"
             onClick={() => handleRequest("ignored", _id)}
           >
             Ignore
           </button>
           <button
-            className="btn btn-secondary text-black"
+            className="btn btn-outline text-cyan-300 border-cyan-700 hover:bg-slate-900/30"
             onClick={() => handleRequest("interested", _id)}
           >
             Interested

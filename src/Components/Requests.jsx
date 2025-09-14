@@ -44,17 +44,21 @@ const Requests = () => {
     }
   };
   if (!requests || !requests.length)
-    return <div className="flex justify-center my-10">No Requests Found</div>;
+    return (
+      <div className="flex justify-center my-10 text-slate-300">
+        No Requests Found
+      </div>
+    );
   return (
     <div className="text-center my-10">
-      <h1 className="text-2xl text-red-200">Connection Requests</h1>
+      <h1 className="text-2xl text-cyan-300">Connection Requests</h1>
       {requests.map((request) => {
         const { _id, firstName, lastName, photoURL, gender, age } =
           request.fromUserId;
         return (
           <div
             key={_id}
-            className="flex justify-between items-center p-4 rounded-lg bg-base-300 w-1/3 mx-auto m-4"
+            className="flex justify-between items-center p-4 rounded-2xl bg-white/6 backdrop-blur-md border border-white/10 text-slate-200 max-w-3xl w-140 mx-auto my-4 shadow-2xl ring-1 ring-white/6"
           >
             <div>
               <img
@@ -67,20 +71,22 @@ const Requests = () => {
               />
             </div>
             <div className="text-left mx-4">
-              <h2 className="font-bold text-xl">
+              <h2 className="font-bold text-xl text-cyan-200">
                 {firstName + " " + lastName}
               </h2>
-              {age && gender && <p>{age + ", " + gender}</p>}
+              {age && gender && (
+                <p className="text-slate-300">{age + ", " + gender}</p>
+              )}
             </div>
             <div className="flex gap-3">
               <button
-                className="btn btn-primary"
+                className="btn bg-cyan-400 text-slate-900 border-0 hover:bg-cyan-300"
                 onClick={() => reviewRequest("accepted", _id)}
               >
                 Accept
               </button>
               <button
-                className="btn btn-secondary"
+                className="btn btn-outline text-cyan-300 border-cyan-700 hover:bg-slate-900/30"
                 onClick={() => reviewRequest("rejected", _id)}
               >
                 Reject

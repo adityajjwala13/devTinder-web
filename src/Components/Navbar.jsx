@@ -12,6 +12,7 @@ const Navbar = () => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleLogout = async () => {
     try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
@@ -26,10 +27,13 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-300 shadow-sm sticky top-0 z-100">
+    <div className="navbar bg-transparent shadow-sm sticky top-0 z-50 border-b border-white/5">
       <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl">
-          🧑🏻‍💻DevTinder
+        <Link
+          to={user ? "/" : "/login"}
+          className="btn btn-ghost text-xl hover:text-cyan-200 font-semibold"
+        >
+          🧑🏻‍💻 DevTinder
         </Link>
       </div>
       <div className="flex gap-2">
@@ -51,7 +55,7 @@ const Navbar = () => {
                     />
                   </div>
                 ) : (
-                  <div className="w-9 h-9 rounded-full bg-indigo-500 flex items-center justify-center">
+                  <div className="w-9 h-9 rounded-full bg-cyan-600 flex items-center justify-center ring-1 ring-white/10">
                     <span className="text-white font-semibold text-lg leading-none flex items-center justify-center h-full">
                       {(user.firstName?.[0] ?? "").toUpperCase()}
                       {(user.lastName?.[0] ?? "").toUpperCase()}
@@ -63,12 +67,11 @@ const Navbar = () => {
           )}
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-slate-900 text-slate-200 rounded-box z-50 mt-3 w-52 p-2 shadow-lg border border-white/5"
           >
             <li>
               <Link to="/profile" className="justify-between">
                 Profile
-                <span className="badge">New</span>
               </Link>
             </li>
             <li>
@@ -78,7 +81,9 @@ const Navbar = () => {
               <Link to="/requests">Requests</Link>
             </li>
             <li>
-              <Link onClick={handleLogout}>Logout</Link>
+              <Link onClick={handleLogout} className="text-rose-400">
+                Logout
+              </Link>
             </li>
           </ul>
         </div>

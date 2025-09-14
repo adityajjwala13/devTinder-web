@@ -52,119 +52,147 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center my-19">
-      <div className="card bg-base-300 w-77 shadow-sm px-3">
-        <div className="card-body my-0">
-          <h2 className="card-title justify-center mt-2 text-xl font-bold">
-            {!alreadyMember ? "Sign Up" : "Log in"}
-          </h2>
-          {!alreadyMember && (
-            <>
-              <div>
-                <p className="label text-xs font-bold mb-1">First Name</p>
-                <label className="input">
-                  <input
-                    type="text"
-                    className="grow"
-                    value={firstName}
-                    onChange={(e) => {
-                      setFirstName(e.target.value);
-                      setError("");
-                    }}
-                  />
-                </label>
-              </div>
-              <div className="mt-1">
-                <p className="label text-xs font-bold mb-1">Last Name</p>
-                <label className="input">
-                  <input
-                    type="text"
-                    className="grow"
-                    value={lastName}
-                    onChange={(e) => {
-                      setLastName(e.target.value);
-                      setError("");
-                    }}
-                  />
-                </label>
-              </div>
-            </>
-          )}
-          <div className="mt-1">
-            <p className="label text-xs font-bold mb-1">Email ID</p>
-            <label className="input">
-              <input
-                type="text"
-                className="grow"
-                value={emailID}
-                onChange={(e) => {
-                  setEmailID(e.target.value);
-                  setError("");
-                }}
-              />
-            </label>
-          </div>
-          <div className="mt-1">
-            <p className="label text-xs font-bold mb-1">Password</p>
-            <label className="input">
-              <input
-                type={showPassword ? "text" : "password"}
-                className="grow"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  setError("");
-                }}
-              ></input>
-              {/* <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)} // 👈 toggle
-                className="ml-2 text-sm"
-              >
-                {showPassword ? "Hide" : "Show"}
-              </button> */}
-              {showPassword ? (
-                <button onClick={() => setShowPassword(false)}>
-                  <Eye size={16} />
-                </button>
-              ) : (
-                <button onClick={() => setShowPassword(true)}>
-                  <EyeOff size={16} />
-                </button>
-              )}
-            </label>
-          </div>
-          <p className="text-red-500">{error}</p>
-          <div className="card-actions justify-center mt-3">
-            <button
-              className="btn btn-primary rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 text-black w-59"
-              onClick={!alreadyMember ? handleSignUp : handleLogin}
-            >
-              {!alreadyMember ? "Sign up" : "Log in"}
-            </button>
-          </div>
-          <div className="text-center">
-            {alreadyMember ? (
+    <div className="relative min-h-screen flex justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <svg
+        className="absolute left-6 top-10 opacity-10 w-48 h-48 text-cyan-400"
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <text
+          x="0"
+          y="40"
+          fontSize="72"
+          fontFamily="monospace"
+          fill="currentColor"
+        >{`<>`}</text>
+      </svg>
+      <svg
+        className="absolute right-6 bottom-10 opacity-10 w-48 h-48 text-pink-400"
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <text
+          x="0"
+          y="48"
+          fontSize="62"
+          fontFamily="monospace"
+          fill="currentColor"
+        >{`</>`}</text>
+      </svg>
+
+      {/* subtle overlay to tint to DevTinder theme */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/40"></div>
+
+      {/* frosted card */}
+      <div className="relative z-10 w-90 max-w-md px-7 mt-20">
+        <div className="card bg-white/6 backdrop-blur-md border border-white/10 shadow-2xl rounded-2xl">
+          <div className="card-body">
+            <h2 className="card-title justify-center mt-2 text-xl font-bold tracking-wide">
+              {!alreadyMember ? "Sign Up" : "Log in"}
+            </h2>
+            {!alreadyMember && (
               <>
-                Not a member?{" "}
-                <button
-                  className="text-blue-500 cursor-pointer font-semibold"
-                  onClick={() => setMember(false)}
-                >
-                  Sign up
-                </button>
-              </>
-            ) : (
-              <>
-                Already a member?{" "}
-                <button
-                  className="text-blue-500 cursor-pointer font-semibold"
-                  onClick={() => setMember(true)}
-                >
-                  Log in
-                </button>
+                <div>
+                  <p className="label text-xs font-bold mb-1">First Name</p>
+                  <label className="input">
+                    <input
+                      type="text"
+                      className="grow"
+                      value={firstName}
+                      onChange={(e) => {
+                        setFirstName(e.target.value);
+                        setError("");
+                      }}
+                    />
+                  </label>
+                </div>
+                <div>
+                  <p className="label text-xs font-bold mb-1">Last Name</p>
+                  <label className="input">
+                    <input
+                      type="text"
+                      className="grow"
+                      value={lastName}
+                      onChange={(e) => {
+                        setLastName(e.target.value);
+                        setError("");
+                      }}
+                    />
+                  </label>
+                </div>
               </>
             )}
+            <div>
+              <p className="label text-xs font-bold mb-1">Email ID</p>
+              <label className="input">
+                <input
+                  type="text"
+                  className="grow"
+                  value={emailID}
+                  onChange={(e) => {
+                    setEmailID(e.target.value);
+                    setError("");
+                  }}
+                />
+              </label>
+            </div>
+            <div>
+              <p className="label text-xs font-bold mb-1">Password</p>
+              <label className="input">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="grow"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setError("");
+                  }}
+                ></input>
+                {showPassword ? (
+                  <button onClick={() => setShowPassword(false)}>
+                    <Eye size={16} />
+                  </button>
+                ) : (
+                  <button onClick={() => setShowPassword(true)}>
+                    <EyeOff size={16} />
+                  </button>
+                )}
+              </label>
+            </div>
+            <p className="text-red-500">{error}</p>
+            <div className="card-actions justify-center mt-3">
+              <button
+                className="btn btn-primary rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 text-black w-62"
+                onClick={!alreadyMember ? handleSignUp : handleLogin}
+              >
+                {!alreadyMember ? "Sign up" : "Log in"}
+              </button>
+            </div>
+            <div className="text-center">
+              {alreadyMember ? (
+                <>
+                  Not a member?{" "}
+                  <button
+                    className="text-blue-400 cursor-pointer font-semibold"
+                    onClick={() => setMember(false)}
+                  >
+                    Sign up
+                  </button>
+                </>
+              ) : (
+                <>
+                  Already a member?{" "}
+                  <button
+                    className="text-blue-400 cursor-pointer font-semibold"
+                    onClick={() => setMember(true)}
+                  >
+                    Log in
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

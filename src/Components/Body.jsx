@@ -10,26 +10,66 @@ import { addUser } from "../utils/userSlice";
 const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const fetchUser = async () => {
-    try {
-      const res = await axios.get(BASE_URL + "/profile/view", {
-        withCredentials: true,
-      });
-      dispatch(addUser(res.data));
-    } catch (error) {
-      if (error.status === 401) navigate("/login");
-      // console.log(error);
-    }
-  };
   useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get(BASE_URL + "/profile/view", {
+          withCredentials: true,
+        });
+        dispatch(addUser(res.data));
+      } catch (error) {
+        if (error.status === 401) navigate("/login");
+        // console.log(error);
+      }
+    };
     fetchUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
-    <div>
-      <Navbar />
-      <Outlet />
-      {/* This will render the child routes */}
-      <Footer />
+    <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      {/* Decorative code glyphs */}
+      <svg
+        className="absolute left-6 top-10 opacity-5 w-48 h-48 text-cyan-400"
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden
+      >
+        <text
+          x="0"
+          y="60"
+          fontSize="72"
+          fontFamily="monospace"
+          fill="currentColor"
+        >{`<>`}</text>
+      </svg>
+      <svg
+        className="absolute right-6 bottom-10 opacity-10 w-48 h-48 text-pink-400"
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <text
+          x="0"
+          y="48"
+          fontSize="62"
+          fontFamily="monospace"
+          fill="currentColor"
+        >{`</>`}</text>
+      </svg>
+      {/* Overlay */}
+      <div
+        className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/40 pointer-events-none"
+        aria-hidden
+      ></div>
+
+      <div className="relative z-10 min-h-screen pb-20">
+        <Navbar />
+        <Outlet />
+        {/* This will render the child routes */}
+        <Footer />
+      </div>
     </div>
   );
 };
