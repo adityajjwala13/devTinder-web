@@ -2,12 +2,16 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequests, removeRequest } from "../utils/requestSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { removeConnections } from "../utils/connectionSlice";
+import Skeleton from "./Skeleton";
+import { toast } from "react-toastify";
 
 const Requests = () => {
   const requests = useSelector((store) => store.requests);
   const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchRequests();
@@ -25,13 +29,13 @@ const Requests = () => {
       );
       dispatch(removeRequest(_id));
       dispatch(removeConnections());
-      // alert(`${status} successfully`);
     } catch (error) {
-      console.error(error.message);
+      toast.error(error.message);
     }
   };
 
   const fetchRequests = async () => {
+    setLoading(true);
     try {
       if (requests) return;
       const fetchRequests = await axios.get(
@@ -40,15 +44,28 @@ const Requests = () => {
       );
       dispatch(addRequests(fetchRequests.data.data));
     } catch (error) {
-      console.error(error.message);
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
+  if (loading)
+    return (
+      <div className="text-center my-10">
+        <h1 className="text-2xl text-cyan-300">Connection Requests</h1>
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+      </div>
+    );
+
   if (!requests || !requests.length)
     return (
       <div className="flex justify-center my-10 text-slate-300">
         No Requests Found
       </div>
     );
+
   return (
     <div className="text-center my-10">
       <h1 className="text-2xl text-cyan-300">Connection Requests</h1>

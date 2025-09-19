@@ -1,28 +1,45 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionSlice";
+import Skeleton from "./Skeleton";
 import { toast } from "react-toastify";
 
 const Connections = () => {
   const dispatch = useDispatch();
   const connections = useSelector((store) => store.connections);
+  const [loading, setLoading] = useState(false);
   const fetchConnections = async () => {
     if (connections) return;
+    setLoading(true);
     try {
-      const connections = await axios.get(BASE_URL + "/user/connections", {
+      const res = await axios.get(BASE_URL + "/user/connections", {
         withCredentials: true,
       });
-      dispatch(addConnections(connections.data.data));
+      dispatch(addConnections(res.data.data));
     } catch (error) {
-      toast.error(error.messsage);
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchConnections();
     // eslint-disable-next-line
   }, []);
+
+  if (loading)
+    return (
+      <div className="text-center my-10">
+        <h1 className="text-2xl text-cyan-300">Connections</h1>
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+      </div>
+    );
+
   if (!connections || !connections.length)
     return (
       <div className="flex justify-center my-10 text-slate-300">
