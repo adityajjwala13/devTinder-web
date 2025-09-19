@@ -7,6 +7,7 @@ import { removeUser } from "../utils/userSlice";
 import { clearFeed } from "../utils/feedSlice";
 import { removeConnections } from "../utils/connectionSlice";
 import { clearRequests } from "../utils/requestSlice";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const user = useSelector((store) => store.user);
@@ -21,6 +22,7 @@ const Navbar = () => {
       dispatch(removeConnections());
       dispatch(clearRequests());
       navigate("/login");
+      toast.success("Logout successful🤗");
     } catch (error) {
       alert(error.message);
     }

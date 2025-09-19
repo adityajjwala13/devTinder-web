@@ -6,6 +6,7 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { Bounce, ToastContainer } from "react-toastify";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -65,6 +66,30 @@ const Body = () => {
       ></div>
 
       <div className="relative z-10 min-h-screen pb-20">
+        <ToastContainer
+          position="top-right"
+          autoClose={1600}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick={true}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable={false}
+          pauseOnHover
+          theme="dark"
+          transition={Bounce}
+          toastStyle={{
+            background: "rgba(255,255,255,0.04)",
+            backdropFilter: "blur(8px)",
+            border: "1px solid rgba(255,255,255,0.08)",
+            color: "#E6EEF3",
+            borderRadius: "12px",
+            boxShadow: "0 8px 30px rgba(2,6,23,0.6)",
+            padding: "12px 14px",
+            maxWidth: "360px",
+            zIndex: 9999,
+          }}
+        />
         <Navbar />
         <Outlet />
         {/* This will render the child routes */}

@@ -5,6 +5,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import Toast from "./Toast";
+import { toast } from "react-toastify";
 
 const EditProfile = ({ user }) => {
   const [error, setError] = useState("");
@@ -12,7 +13,7 @@ const EditProfile = ({ user }) => {
   const [lastName, setLastName] = useState(user.lastName);
   const [age, setAge] = useState(user.age);
   const [gender, setGender] = useState(user.gender);
-  const [about, setAbout] = useState(user.about);
+  const [about, setAbout] = useState(user.about || "");
   const [photoURL, setPhotoURL] = useState(user.photoURL);
   const dispatch = useDispatch();
 
@@ -35,6 +36,7 @@ const EditProfile = ({ user }) => {
         withCredentials: true,
       });
       dispatch(addUser(res?.data?.data));
+      toast.success("Profile updated successfully🚀");
       setError("");
     } catch (error) {
       setError(error?.response?.data || "Unable to save profile");

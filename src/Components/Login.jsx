@@ -5,15 +5,16 @@ import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { Eye, EyeOff } from "lucide-react";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [emailID, setEmailID] = useState("ravi@gmail.com");
+  const [emailID, setEmailID] = useState("dua@gmail.com");
   const [error, setError] = useState("");
-  const [password, setPassword] = useState("Ravi@4888");
+  const [password, setPassword] = useState("Dua@4888");
   const [showPassword, setShowPassword] = useState(false);
-  const [alreadyMember, setMember] = useState(false);
+  const [alreadyMember, setMember] = useState(true);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,9 +28,10 @@ const Login = () => {
         withCredentials: true,
       });
       dispatch(addUser(response?.data.data));
+      toast.success("Login successful🚀");
       navigate("/");
     } catch (error) {
-      setError(error?.response.data || "Something went wrong");
+      setError(error?.response?.data || "Unable to reach server!!");
     }
   };
 
@@ -45,9 +47,10 @@ const Login = () => {
         withCredentials: true,
       });
       dispatch(addUser(response?.data.data));
+      toast.success("Signup successful🚀");
       navigate("/profile");
     } catch (error) {
-      setError(error?.response.data || "Something went wrong");
+      setError(error?.response.data || "Unable to reach server!!");
     }
   };
 
