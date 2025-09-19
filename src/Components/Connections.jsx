@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionSlice";
+import { toast } from "react-toastify";
 
 const Connections = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const Connections = () => {
       });
       dispatch(addConnections(connections.data.data));
     } catch (error) {
-      console.error(error.message);
+      toast.error(error.messsage);
     }
   };
   useEffect(() => {
