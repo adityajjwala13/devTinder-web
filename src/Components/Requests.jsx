@@ -63,8 +63,8 @@ const Requests = () => {
         <Skeleton />
       </div>
     );
-
-  if (!requests || !requests.length)
+  if (!requests) return;
+  if (!requests.length)
     return (
       <div className="flex justify-center my-10 text-slate-300">
         No Requests Found

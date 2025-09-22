@@ -4,11 +4,12 @@ import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionSlice";
 import Skeleton from "./Skeleton";
-import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Connections = () => {
   const dispatch = useDispatch();
   const connections = useSelector((store) => store.connections);
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const fetchConnections = async () => {
     if (connections) return;
@@ -19,7 +20,11 @@ const Connections = () => {
       });
       dispatch(addConnections(res.data.data));
     } catch (error) {
-      toast.error(error.message);
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Unable to load connections";
+      navigate("/error", { state: { message } });
     } finally {
       setLoading(false);
     }
@@ -39,8 +44,8 @@ const Connections = () => {
         <Skeleton />
       </div>
     );
-
-  if (!connections || !connections.length)
+  if (!connections) return;
+  if (!connections.length)
     return (
       <div className="flex justify-center my-10 text-slate-300">
         No Connections Found
