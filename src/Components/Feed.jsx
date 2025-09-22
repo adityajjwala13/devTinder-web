@@ -5,9 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/feedSlice";
 import UserCard from "./UserCard";
 import Skeleton from "./Skeleton";
+// import { Bounce } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Feed = () => {
   const feed = useSelector((store) => store.feed);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const getFeed = async () => {
@@ -17,14 +20,18 @@ const Feed = () => {
       const res = await axios.get(BASE_URL + "/feed", {
         withCredentials: true,
       });
-      // console.log(res);
       dispatch(addFeed(res?.data?.data));
     } catch (error) {
-      console.log(error.message);
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Unable to load feed";
+      navigate("/error", { state: { message } });
     } finally {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     getFeed();
     //eslint-disable-next-line
@@ -35,8 +42,8 @@ const Feed = () => {
         <Skeleton variant="card" />
       </div>
     );
-
-  if (!feed || feed.length <= 0)
+  if (!feed) return;
+  if (feed.length <= 0)
     return (
       <div className="flex justify-center my-10">No new users found!!</div>
     );

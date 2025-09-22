@@ -39,6 +39,7 @@ const EditProfile = ({ user }) => {
       toast.success("Profile updated successfully🚀");
       setError("");
     } catch (error) {
+      alert("gygyg");
       setError(error?.response?.data || "Unable to save profile");
     }
   };
@@ -108,7 +109,7 @@ const EditProfile = ({ user }) => {
               </p>
               <label className="input">
                 <input
-                  type="text"
+                  type="Number"
                   className="grow bg-transparent text-slate-200 placeholder-slate-400"
                   value={age}
                   onChange={(e) => {

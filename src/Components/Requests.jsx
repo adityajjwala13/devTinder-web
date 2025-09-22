@@ -6,13 +6,14 @@ import { useEffect, useState } from "react";
 import { removeConnections } from "../utils/connectionSlice";
 import Skeleton from "./Skeleton";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Requests = () => {
   const requests = useSelector((store) => store.requests);
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetchRequests();
     // eslint-disable-next-line
@@ -44,7 +45,11 @@ const Requests = () => {
       );
       dispatch(addRequests(fetchRequests.data.data));
     } catch (error) {
-      toast.error(error.message);
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Unable to load request";
+      navigate("/error", { state: { message } });
     } finally {
       setLoading(false);
     }

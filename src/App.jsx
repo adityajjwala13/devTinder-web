@@ -7,6 +7,7 @@ import appStore from "./utils/appStore";
 import Feed from "./Components/Feed";
 import Connections from "./Components/Connections";
 import Requests from "./Components/Requests";
+import ErrorPage from "./Components/ErrorPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               <Route path="/connections" element={<Connections />} />
               <Route path="/login" element={<Login />} />
               <Route path="/requests" element={<Requests />} />
+              <Route path="/error" element={<ErrorPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
