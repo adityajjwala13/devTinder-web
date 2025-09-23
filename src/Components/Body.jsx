@@ -67,7 +67,7 @@ const Body = () => {
       <div className="relative z-10 min-h-screen pb-20">
         <ToastContainer
           position="top-right"
-          autoClose={1600}
+          autoClose={1300}
           hideProgressBar={true}
           newestOnTop={false}
           closeOnClick={true}

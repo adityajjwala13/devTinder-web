@@ -92,8 +92,11 @@ const Login = () => {
       <div className="relative z-10 w-90 max-w-md px-7 mt-20">
         <div className="card bg-white/6 backdrop-blur-md border border-white/10 shadow-2xl rounded-2xl">
           <div className="card-body">
-            <h2 className="card-title justify-center mt-2 text-xl font-bold tracking-wide">
-              {!alreadyMember ? "Sign Up" : "Log in"}
+            <h2
+              className="card-title justify-center mt-2 text-xl font-bold tracking-wide"
+              style={{ fontFamily: "Poppins, Inter, system-ui" }}
+            >
+              {!alreadyMember ? "Sign up" : "Log in"}
             </h2>
             {!alreadyMember && (
               <>
